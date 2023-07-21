@@ -1,3 +1,7 @@
-module github.com/alkaaf/gen-gram
+module github.com/alkaaf/gengram
 
 go 1.19
+
+require (
+	
+)
