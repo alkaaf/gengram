@@ -8,12 +8,9 @@ import (
 
 func Ngram(phrases []string, min int, max int) []string {
 	var ngrams []string
-	var re = regexp.MustCompile(`/[^a-z0-9\s]/g`)
+
 	for _, phrase := range phrases {
-		phrase = strings.ToLower(phrase)
-		phrase = re.ReplaceAllString(phrase, "")
-		phrase = strings.TrimSpace(phrase)
-		words := strings.Split(phrase, " ")
+		words := Cleanse(phrase)
 		for _, word := range words {
 			if len(word) < min {
 				if !checkStringInSlice(word, ngrams) {
@@ -32,6 +29,15 @@ func Ngram(phrases []string, min int, max int) []string {
 		}
 	}
 	return ngrams
+}
+
+func Cleanse(phrase string) []string {
+	var re = regexp.MustCompile(`/[^a-z0-9\s]/g`)
+	phrase = strings.ToLower(phrase)
+	phrase = re.ReplaceAllString(phrase, "")
+	phrase = strings.TrimSpace(phrase)
+	words := strings.Split(phrase, " ")
+	return words
 }
 
 // create a function to check specific string in slice
